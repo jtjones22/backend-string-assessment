@@ -19,7 +19,14 @@
 
 def verbing(s):
     """Your code goes here.  Edit this docstring."""
-    return
+    if len(s) >= 3 and s[-3:] != "ing":
+        s = s + "ing"
+        return s
+    elif s[-3:] == "ing":
+        s = s + "ly"
+        return s
+    else:
+        return s
 
 
 # E. not_bad
@@ -32,7 +39,12 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
     """Your code goes here.  Edit this docstring."""
-    return
+    not_index = s.find("not")
+    if "not" in s and "bad" in s[not_index:]:
+        s = s[0:not_index] + "good!"
+        return s
+    else:
+        return s
 
 
 # F. front_back
@@ -44,11 +56,42 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
     """Your code goes here.  Edit this docstring."""
-    return
-
-
+    if len(a) % 2 == 0 and len(b) % 2 == 0:
+        half_a = int(round(len(a) * .5))
+        half_b = int(round(len(b) * .5))
+        a_front = a[0:half_a]
+        a_back = a[half_a:]
+        b_front = b[0:half_b]
+        b_back = b[half_b:]
+        return a_front + b_front + a_back + b_back
+    elif len(a) % 2 == 1 and len(b) % 2 == 0:
+        half_a = int(round(len(a) * .5)) + 1
+        half_b = int(round(len(b) * .5)) + 1
+        a_front = a[0:half_a]
+        a_back = a[half_a:]
+        b_front = b[0:half_b]
+        b_back = b[half_b:]
+        return a_front + b_front + a_back + b_back
+    elif len(a) % 2 == 0 and len(b) % 2 == 1:
+        half_a = int(round(len(a) * .5))
+        half_b = int(round(len(b) * .5)) + 1
+        a_front = a[0:half_a]
+        a_back = a[half_a:]
+        b_front = b[0:half_b]
+        b_back = b[half_b:]
+        return a_front + b_front + a_back + b_back
+    elif len(a) % 2 == 1 and len(b) % 2 == 1:
+        half_a = int(round(len(a) * .5)) + 1
+        half_b = int(round(len(b) * .5))
+        a_front = a[0:half_a]
+        a_back = a[half_a:]
+        b_front = b[0:half_b]
+        b_back = b[half_b:]
+        return a_front + b_front + a_back + b_back
 # Provided simple test() function used in main() to print
 # what each function returns vs. what it's supposed to return.
+
+
 def test(got, expected):
     """Your code goes here.  Edit this docstring."""
     if got == expected:
@@ -69,7 +112,7 @@ def main():
 
     print()
     print('not_bad')
-    test(not_bad('This movie is not so bad'), 'This movie is good')
+    test(not_bad('This movie is not so bad'), 'This movie is good!')
     test(not_bad('This dinner is not that bad!'), 'This dinner is good!')
     test(not_bad('This tea is not hot'), 'This tea is not hot')
     test(not_bad("It's bad yet not"), "It's bad yet not")
